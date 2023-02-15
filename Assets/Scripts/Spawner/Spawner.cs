@@ -2,17 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner : GiangMonoBehavior
+public abstract class Spawner : GiangMonoBehavior
 {
-    public static Spawner Instance { get => instance; }
-    private static Spawner instance ;
     [SerializeField] private List<Transform> listObject;
+    [SerializeField] private List<Transform> poolObjects;
 
-    protected override void Awake()
-    {
-        instance = this;
-        base.Awake();     
-    }
+    [SerializeField] private Transform holder;
     protected override void LoadComponent()
     {
         LoadPrefabs();
@@ -22,24 +17,40 @@ public class Spawner : GiangMonoBehavior
         if (listObject.Count > 0) return;
 
         Transform prefabObj = transform.Find("prefabs");
-
         foreach (Transform item in prefabObj)
         {
             listObject.Add(item);
             HideItem(item);
         }
+    }
+    protected virtual void LoadHolder()
+    {
+        holder = transform.Find("holder");
 
     }
     protected virtual void HideItem(Transform item)
     {
         item.gameObject.SetActive(false);
     }
-    public virtual void ShowItem(Vector3 position, Quaternion rotation)
+    public virtual void Spawn(string prefabName, Vector3 position, Quaternion rotation)
     {
-        Transform newBullet = Instantiate(listObject[0], position, rotation);
-        newBullet.gameObject.SetActive(true);
-    }
+        Transform newPrefab = Instantiate(GetPrefabByName(prefabName), position, rotation);
+        newPrefab.parent = holder;
+        newPrefab.gameObject.SetActive(true);
 
+    }
+    protected virtual Transform GetPrefabByName(string prefabName)
+    {
+        foreach (Transform item in listObject)
+        {
+            if (prefabName == item.name) return item;
+        }
+        return null;
+    }
+    protected virtual Transform GetPrefabFromPool(Transform prefab){
+        return null;
+
+    }
 
 
 

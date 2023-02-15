@@ -20,7 +20,7 @@ public class ShipShooting : MonoBehaviour
         countDelayTime += Time.deltaTime;
         if (countDelayTime < delayShootTime) return;
         countDelayTime = 0f;
-        Spawner.Instance.ShowItem(GetBulletPosition(), GetBulletRotation());
+        BulletSpawner.Instance.Spawn( BulletSpawner.bulletOne, GetBulletPosition(), GetBulletRotation());
     }
     protected virtual bool IsShooting()
     {
