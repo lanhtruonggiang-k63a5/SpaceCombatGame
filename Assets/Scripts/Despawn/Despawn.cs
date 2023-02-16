@@ -4,7 +4,6 @@ using UnityEngine;
 
 public abstract class Despawn : MonoBehaviour
 {
-    
     private void Update()
     {
         if (CanDespawn()) DespawnObject(); 
@@ -12,10 +11,6 @@ public abstract class Despawn : MonoBehaviour
     protected abstract bool CanDespawn();
     
     protected virtual void DespawnObject(){
-        // Destroy(transform.parent.gameObject);
-        
+        Destroy(transform.parent.gameObject);
     }
-   
-
-
 }
