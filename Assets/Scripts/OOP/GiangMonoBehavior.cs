@@ -4,6 +4,9 @@ using UnityEngine;
 
 public abstract class GiangMonoBehavior : MonoBehaviour
 {
+    protected virtual void OnEnable(){
+        
+    }
     protected virtual void Reset()
     {
         LoadComponent();
@@ -17,6 +20,8 @@ public abstract class GiangMonoBehavior : MonoBehaviour
     protected virtual void ResetValue(){
 
     }
-    protected abstract void LoadComponent();
+    protected virtual void LoadComponent(){
+
+    }
     
 }

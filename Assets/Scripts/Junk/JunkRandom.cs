@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class JunkRandom : GiangMonoBehavior
 {
-    [SerializeField] protected JunkController JunkController;
+    [SerializeField] protected JunkSpawnController JunkSpawnController;
 
     protected override void LoadComponent()
     {
@@ -12,8 +12,8 @@ public class JunkRandom : GiangMonoBehavior
     }
     protected virtual void LoadJunkController()
     {
-        if (JunkController != null) return;
-        JunkController = GetComponent<JunkController>();
+        if (JunkSpawnController != null) return;
+        JunkSpawnController = GetComponent<JunkSpawnController>();
     }
     private void Start()
     {
@@ -21,9 +21,11 @@ public class JunkRandom : GiangMonoBehavior
     }
     protected virtual void JunkSpawning()
     {
-        Vector3 pos = transform.position;
-        Quaternion rot = transform.rotation;
-        Transform junk = JunkController.JunkSpawner.Spawn(JunkSpawner.junkOne, pos, rot);
+        Transform point = JunkSpawnController.JunkSpawnPoint.RandomPoint();
+        Vector3 pos = point.position;
+        Quaternion rot = point.rotation;
+        
+        Transform junk = JunkSpawnController.JunkSpawner.Spawn(JunkSpawner.junkOne, pos, rot);
         junk.gameObject.SetActive(true);
         Invoke(nameof(JunkSpawning), 1f);
     }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DespawnByTime : Despawn
+public abstract class DespawnByTime : Despawn
 {
     [SerializeField] private float maxTime;
     private float counter;
