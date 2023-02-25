@@ -4,24 +4,30 @@ using UnityEngine;
 
 public abstract class GiangMonoBehavior : MonoBehaviour
 {
-    protected virtual void OnEnable(){
-        
+    protected virtual void OnEnable()
+    {
+
     }
     protected virtual void Reset()
     {
-        LoadComponent();
+        LoadComponents();
         ResetValue();
     }
     protected virtual void Awake()
     {
-        LoadComponent();
+        LoadComponents();
         ResetValue();
     }
-    protected virtual void ResetValue(){
+    protected virtual void Start()
+    {
 
     }
-    protected virtual void LoadComponent(){
+    protected virtual void ResetValue()
+    {
 
     }
-    
+    protected virtual void LoadComponents() { }
+
+
+
 }

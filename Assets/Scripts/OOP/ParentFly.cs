@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ParentFly : GiangMonoBehavior
+public abstract class ParentFly : GiangMonoBehavior
 {
     [SerializeField] protected float speed;
     [SerializeField] protected Vector3 direction = Vector3.right;
+
 
     private void Update()
     {

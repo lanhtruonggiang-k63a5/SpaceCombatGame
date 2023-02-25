@@ -8,7 +8,7 @@ public class JunkRotate : GiangMonoBehavior
     private Vector3 euler = Vector3.forward;
     [SerializeField] protected JunkCtrl junkCtrl;
 
-    protected override void LoadComponent()
+    protected override void LoadComponents()
     {
         LoadJunkController();
     }
@@ -16,6 +16,8 @@ public class JunkRotate : GiangMonoBehavior
     {
         if (junkCtrl != null) return;
         junkCtrl = FindObjectOfType<JunkCtrl>();
+        Debug.Log(transform.name + ": LoadJunkController", gameObject);
+
     }
     private void Update()
     {

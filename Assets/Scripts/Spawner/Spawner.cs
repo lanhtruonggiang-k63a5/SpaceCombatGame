@@ -7,7 +7,10 @@ public abstract class Spawner : GiangMonoBehavior
     [SerializeField] protected Transform holder;
     [SerializeField] protected List<Transform> prefabs;
     [SerializeField] protected List<Transform> poolObjects;
-    protected override void LoadComponent()
+
+    public int SpawnedCount { get; private set; }
+
+    protected override void LoadComponents()
     {
         LoadPrefabs();
         LoadHolder();
@@ -17,7 +20,7 @@ public abstract class Spawner : GiangMonoBehavior
         if (holder != null) return;
 
         holder = transform.Find("holder");
-        Debug.Log(transform.name + ": LoadHodler", gameObject);
+        Debug.Log(transform.name + ": LoadHolder", gameObject);
     }
     protected virtual void LoadPrefabs()
     {
@@ -28,6 +31,7 @@ public abstract class Spawner : GiangMonoBehavior
             prefabs.Add(prefab);
 
         }
+        Debug.Log(transform.name + ": LoadPrefabs", gameObject);
         HidePrefabs();
     }
     protected virtual void HidePrefabs()
@@ -37,7 +41,7 @@ public abstract class Spawner : GiangMonoBehavior
             prefab.gameObject.SetActive(false);
         }
     }
-    
+
 
     public virtual Transform Spawn(string prefabName, Vector3 position, Quaternion rotation)
     {
@@ -47,11 +51,20 @@ public abstract class Spawner : GiangMonoBehavior
             Debug.LogError("Cant get prefab " + prefabName + " by name");
             return null;
         }
+        
+        return Spawn(prefab,position,rotation);
+
+    }
+    public virtual Transform Spawn(Transform prefab, Vector3 position, Quaternion rotation){
         Transform newPrefab = GetObjectFromPool(prefab);
         newPrefab.SetPositionAndRotation(position, rotation);
         newPrefab.parent = holder;
+        SpawnedCount++;
         return newPrefab;
-
+    }
+    public virtual Transform RandomPrefabs(){
+        int rand = Random.Range(0, prefabs.Count);
+        return prefabs[rand];
     }
     protected virtual Transform GetObjectFromPool(Transform prefab)
     {
@@ -72,6 +85,7 @@ public abstract class Spawner : GiangMonoBehavior
     {
         this.poolObjects.Add(obj);
         obj.gameObject.SetActive(false);
+        SpawnedCount--;
     }
 
     protected virtual Transform GetPrefabByName(string prefabName)
@@ -82,8 +96,8 @@ public abstract class Spawner : GiangMonoBehavior
         }
         return null;
     }
-    
-    
+
+
 
 
 

@@ -6,7 +6,7 @@ public abstract class PointSpawner : GiangMonoBehavior
 {
     [SerializeField] protected List<Transform> points;
 
-    protected override void LoadComponent()
+    protected override void LoadComponents()
     {
         LoadPoints();        
     }
@@ -17,6 +17,7 @@ public abstract class PointSpawner : GiangMonoBehavior
         {
             points.Add(item);
         }
+        Debug.Log(transform.name + ": LoadPoints", gameObject);
     }
     public virtual Transform RandomPoint(){
         int rand = Random.Range(0, points.Count);

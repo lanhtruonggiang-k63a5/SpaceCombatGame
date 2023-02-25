@@ -11,6 +11,6 @@ public class JunkSpawner : Spawner
         base.Awake();
         instance = this;
     }
-    public static string junkOne = "junk_1";
+    // public static string junkOne = "junk_1";
     
 }

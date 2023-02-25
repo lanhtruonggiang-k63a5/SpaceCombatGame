@@ -15,13 +15,15 @@ public class GameCtrl : GiangMonoBehavior
         base.Awake();
         instance = this;
     }
-    protected override void LoadComponent()
+    protected override void LoadComponents()
     {
-        base.LoadComponent();
         LoadCamera();
     }
     protected virtual void LoadCamera(){
+        if(mainCamera != null) return;
         mainCamera =  FindObjectOfType<Camera>();
+        Debug.Log(transform.name + ": LoadCamera", gameObject);
+
     }
     
 }
