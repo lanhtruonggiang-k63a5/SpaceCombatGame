@@ -15,7 +15,7 @@ public class JunkRotate : GiangMonoBehavior
     protected virtual void LoadJunkController()
     {
         if (junkCtrl != null) return;
-        junkCtrl = FindObjectOfType<JunkCtrl>();
+        junkCtrl = transform.GetComponentInParent<JunkCtrl>();
         Debug.Log(transform.name + ": LoadJunkController", gameObject);
 
     }

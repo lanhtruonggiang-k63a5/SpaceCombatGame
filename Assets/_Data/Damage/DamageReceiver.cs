@@ -12,7 +12,6 @@ public class DamageReceiver : GiangMonoBehavior
     protected BoxCollider2D boxCollider2D;
 
 
-    
     private void OnEnable()
     {
         Reborn();
