@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Despawn : GiangMonoBehavior
 {
+    
     private void Update()
     {
         if (CanDespawn()) DespawnObject(); 

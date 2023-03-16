@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
-public class DamageReceiver : GiangMonoBehavior
+public abstract class DamageReceiver : GiangMonoBehavior
 {
 
     [SerializeField] protected int hp = 2;
@@ -25,7 +25,6 @@ public class DamageReceiver : GiangMonoBehavior
         boxCollider2D = GetComponent<BoxCollider2D>();
         boxCollider2D.isTrigger = true;
         Debug.Log(transform.name + ": LoadBoxCollider2D", gameObject);
-
     }
     
     protected virtual void Reborn()
@@ -51,13 +50,12 @@ public class DamageReceiver : GiangMonoBehavior
     {
         return hp <= 0;
     }
-    protected virtual void OnDead(){
-        
-    }
     protected virtual void CheckIsDead(){
         if(!IsDead()) return;
         isDead = true;
         OnDead();
     }
+    protected abstract void OnDead();
+
 
 }

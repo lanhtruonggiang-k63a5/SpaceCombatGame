@@ -4,21 +4,21 @@ using UnityEngine;
 
 public abstract class DespawnByTime : Despawn
 {
-    [SerializeField] private float maxTime;
-    private float counter;
+    [SerializeField] protected float delayTime;
+    protected float timer;
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        this.timer=0f;
+    }
+
 
     protected override bool CanDespawn()
     {
-        if (counter < maxTime)
-        {
-            counter += Time.deltaTime;
-            return false;
-        }
-        else
-        {
-            counter = 0f;
-            return true;
-        }
+        timer += Time.deltaTime;
+        if(timer > delayTime) return true;
+        return false;
 
     }
 }

@@ -12,7 +12,6 @@ public class BulletSpawner : Spawner
         instance = this;
     }
     public static string bulletOne = "bullet_1";
-    public static string bulletTwo = "bullet_2";
 
     
 }

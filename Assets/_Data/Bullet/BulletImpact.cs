@@ -16,15 +16,17 @@ public class BulletImpact : BulletAbstract
         LoadRigidbody();
     }
 
-    protected virtual void LoadBoxCollider(){
-        if(boxCollider2D != null) return;
+    protected virtual void LoadBoxCollider()
+    {
+        if (boxCollider2D != null) return;
         boxCollider2D = GetComponent<BoxCollider2D>();
         boxCollider2D.isTrigger = true;
         Debug.Log(transform.name + ": LoadBoxCollider", gameObject);
 
     }
-    protected virtual void LoadRigidbody(){
-        if(rigidbody2D != null) return;
+    protected virtual void LoadRigidbody()
+    {
+        if (rigidbody2D != null) return;
         rigidbody2D = GetComponent<Rigidbody2D>();
         rigidbody2D.isKinematic = true;
         Debug.Log(transform.name + ": LoadRigidbody", gameObject);
@@ -32,9 +34,17 @@ public class BulletImpact : BulletAbstract
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
+        this.OnHit();
         bulletCtrl.DamageSender.Send(other.transform);
-        Debug.Log("call send");
+    }
+    protected virtual void OnHit()
+    {
+        string hitName = FXSpawner.hitOne;
+        Vector3 pos = transform.position;
+        Quaternion ros = transform.rotation;
+        Transform hitFX =  FXSpawner.Instance.Spawn(hitName,pos,ros);
+        hitFX.gameObject.SetActive(true);
     }
 
-    
+
 }
