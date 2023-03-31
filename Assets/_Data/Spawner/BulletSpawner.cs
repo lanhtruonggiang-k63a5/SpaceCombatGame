@@ -9,7 +9,9 @@ public class BulletSpawner : Spawner
     protected override void Awake()
     {
         base.Awake();
+        if(instance != null) Debug.Log("only 1 bullet spawner");
         instance = this;
+        
     }
     public static string bulletOne = "bullet_1";
 

@@ -34,17 +34,10 @@ public class BulletImpact : BulletAbstract
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        this.OnHit();
+ 
         bulletCtrl.DamageSender.Send(other.transform);
     }
-    protected virtual void OnHit()
-    {
-        string hitName = FXSpawner.hitOne;
-        Vector3 pos = transform.position;
-        Quaternion ros = transform.rotation;
-        Transform hitFX =  FXSpawner.Instance.Spawn(hitName,pos,ros);
-        hitFX.gameObject.SetActive(true);
-    }
+    
 
 
 }
