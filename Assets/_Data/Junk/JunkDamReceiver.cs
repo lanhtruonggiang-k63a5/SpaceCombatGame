@@ -13,9 +13,9 @@ public class JunkDamReceiver : DamageReceiver
     protected virtual void LoadJunkCtrl()
     {
         if(junkCtrl != null) return;
-        junkCtrl = FindObjectOfType<JunkCtrl>();
+        junkCtrl = GetComponentInParent<JunkCtrl>();
         Debug.Log(transform.name + ": LoadJunkCtrl", gameObject);
-
+        
     }
     protected override void OnDead()
     {

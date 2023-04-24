@@ -15,7 +15,6 @@ public class BulletDamSender : DamageSender
         if(bulletCtrl != null) return;
         bulletCtrl = transform.parent.GetComponent<BulletCtrl>();
         Debug.Log(transform.name + ": LoadBulletCtrl", gameObject);
-
     }
     public override void Send(DamageReceiver damageReceiver)
     {

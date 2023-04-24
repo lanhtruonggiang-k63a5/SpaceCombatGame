@@ -1,13 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System;
-
 [Serializable]
-public class ItemInventory 
+public class ItemRecipeIngredient 
 {
     public ItemProfileSO itemProfile;
-    public int itemCount = 0;
-    public int maxStack =  7;
-    
+    public int itemCount;
 }

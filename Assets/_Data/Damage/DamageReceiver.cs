@@ -21,12 +21,13 @@ public abstract class DamageReceiver : GiangMonoBehavior
         base.LoadComponents();
         LoadBoxCollider2D();
     }
-    protected virtual void LoadBoxCollider2D(){
+    protected virtual void LoadBoxCollider2D()
+    {
         boxCollider2D = GetComponent<BoxCollider2D>();
         boxCollider2D.isTrigger = true;
-        Debug.Log(transform.name + ": LoadBoxCollider2D", gameObject);
+        Debug.LogWarning(transform.name + ": LoadBoxCollider2D", gameObject);
     }
-    
+
     protected virtual void Reborn()
     {
         hp = hpMax;
@@ -34,14 +35,14 @@ public abstract class DamageReceiver : GiangMonoBehavior
     }
     protected virtual void Add(int add)
     {
-        if(isDead) return;
+        if (isDead) return;
         if (hp + add >= hpMax) hp = hpMax;
         else hp += add;
     }
 
     public virtual void Deduct(int deduct)
     {
-        if(isDead) return;
+        if (isDead) return;
         if (hp - deduct <= 0) hp = 0;
         else hp -= deduct;
         CheckIsDead();
@@ -50,8 +51,9 @@ public abstract class DamageReceiver : GiangMonoBehavior
     {
         return hp <= 0;
     }
-    protected virtual void CheckIsDead(){
-        if(!IsDead()) return;
+    protected virtual void CheckIsDead()
+    {
+        if (!IsDead()) return;
         isDead = true;
         OnDead();
     }

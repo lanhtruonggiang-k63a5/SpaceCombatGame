@@ -5,18 +5,16 @@ using UnityEngine;
 [RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
 
-public class ItemLooter : GiangMonoBehavior
+public class ItemLooter : InventoryAbstract
 {
     [SerializeField] protected CircleCollider2D _collider;
     [SerializeField] protected Rigidbody2D _rigidbody;
-    [SerializeField] protected Inventory inventory;
 
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadCollider();
         this.LoadRigidbody();
-        this.LoadInventory();
     }
     protected virtual void LoadCollider()
     {
@@ -35,19 +33,15 @@ public class ItemLooter : GiangMonoBehavior
         Debug.Log(transform.name + "load Collider ", gameObject);
 
     }
-    protected virtual void LoadInventory()
-    {
-        if (inventory != null) return;
-        this.inventory = transform.parent.GetComponent<Inventory>();
-        Debug.Log(transform.name + "load Inventory ", gameObject);
-    }
-
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
-        if( other.GetComponent<ItemPickupable>() == null) return;
+        ItemPickupable itemPickupable = other.GetComponent<ItemPickupable>();
+        if (itemPickupable == null) return;
 
-        Debug.Log(other.name);
-        Debug.Log(other.transform.parent.name);
-        Debug.Log("co the nhat duoc");
+        ItemEnum itemEnum =  itemPickupable.GetItemEnum();
+        if(this.inventory.AddItem(itemEnum,1)){
+            itemPickupable.Picked();
+        }
     }
+    
 }

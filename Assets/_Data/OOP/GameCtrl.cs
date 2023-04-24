@@ -9,7 +9,7 @@ public class GameCtrl : GiangMonoBehavior
 
     public Camera MainCamera { get => mainCamera; }
     [SerializeField] protected Camera mainCamera;
-
+ 
     protected override void Awake()
     {
         base.Awake();

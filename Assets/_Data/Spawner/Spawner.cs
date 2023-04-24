@@ -18,7 +18,6 @@ public abstract class Spawner : GiangMonoBehavior
     protected virtual void LoadHolder()
     {
         if (holder != null) return;
-
         holder = transform.Find("holder");
         Debug.Log(transform.name + ": LoadHolder", gameObject);
     }
